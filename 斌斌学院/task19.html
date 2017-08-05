@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			display:flex;
+			flex-direction:column;
+			align-items:center;
+		}
+		li {
+			display:inline-block;
+			width:50px;
+			background-color:red;
+			text-indent: -9999px;
+			margin:0 1px;
+			line-height:50px;
+		}
+		li:hover {
+			cursor:pointer;
+		}
+		ul {
+			padding-left:0;
+			display:flex;
+			align-items:flex-end;
+		}
+		input {
+			border:1px solid #eee;
+			background-color:#fff;
+			border-radius:10px;
+			padding:10px;
+			cursor:pointer;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<input type="text" id="inputText" placeholder="请输入10-100的数字">
+		<input type="button" id="inputLeftIn" value="左侧入">
+		<input type="button" id="inputRightIn" value="右侧入">
+		<input type="button" id="inputLeftOut" value="左侧出">
+		<input type="button" id="inputRightOut" value="右侧出">
+		<input type="button" id="randomNum" value="随机60个数字">
+		<input type="text" id="ideNum" placeholder="排序速度，默认50">
+		<input type="button" id="sort" value="排序">
+		<input type="button" id="refresh" value="刷新页面">
+	</div>
+	<ul id="content"></ul>
+	<p>step1、自主输入60个数字或者点"随机60个数字"</p>
+    <p>step2、填写排序速度，默认50（可选）</p>  
+    <p>step3、点击“排序”按钮</p>
+    <P>注：重来请按“刷新页面”</P>
+
+    <script>
+    	var inputText = document.getElementById("inputText");  	    	
+    	var content = document.getElementById("content");
+    	var numberStatus = 0;
+    	//左侧入
+    	function inputLeftIn() {
+    		if(numberStatus == 1) {
+    			alert("已随机选取数据，无法再添加!");
+    			return false;
+    		} 
+    		var value = validNum();
+    		var liNum = content.childNodes.length;
+    		if(value != false) {
+    			if(liNum < 60) {
+    				var newItem = document.createElement("li");
+    				var textNode = document.createTextNode(value);
+    				newItem.appendChild(textNode);
+    				content.insertBefore(newItem,content.childNodes[0]);
+    				newItem.style.height = value + "px";
+    				newItem.style.width = "15px";
+    				newItem.setAttribute("title",value);
+    			}else {
+    				alert("最多输入60个!");
+    			}
+    		}
+
+    	}
+    	//右侧入
+    	function inputRightIn() {
+    		if(numberStatus == 1) {
+    			alert("已随机选取数据，无法再添加!");
+    			return false;
+    		}
+    		var value = validNum();
+    		var liNum = content.childNodes.length;
+    		if(value != false) {
+    			if(liNum < 60) {
+    				var newItem = document.createElement("li");
+    				var textNode = document.createTextNode(value);
+    				newItem.appendChild(textNode);
+    				content.appendChild(newItem);
+    				newItem.style.height = value + "px";
+    				newItem.style.width = "15px";
+    				newItem.setAttribute("title",value);
+    			}else {
+    				alert("最多输入60个!");
+    			}
+    		}
+    	}
+    	//左侧出
+    	function inputLeftOut() {
+    		alert("删除最左侧数字"+content.firstChild.innerHTML+"!");
+    		content.removeChild(content.firstChild);
+    	}
+    	//右侧出
+    	function inputRightOut() {
+    		alert("删除最右侧数字"+content.childNodes[content.childNodes.length - 1].innerHTML+"!");
+    		content.removeChild(content.childNodes[content.childNodes.length - 1]);
+    	}
+    	content.addEventListener("click",function(e) {
+    		content.removeChild(e.target);
+    	},false)
+    	//过滤数字
+    	function validNum() {
+    		var num = parseInt(inputText.value);
+    		if(isNaN(num) || (num <10) || (num >100)) {
+    			alert("请输入10-100的数字!");
+    			return false;
+    		}else {
+    			return num;
+    		}
+    	}
+    	//随机产生60个数
+    	function randomNum() {
+    		var htm = "";
+    		if(status == 1) {
+    			return false;
+    		}
+    		for(var i = 0;i < 60;i++) {
+    			var x = Math.floor(Math.random()*90 + 10);
+    			htm += "<li style='height:" + x + "px;width:15px;transition:all .5s;' title=" + x + ">" + x + "</li>";
+    		}
+    		content.innerHTML = htm;
+    		numberStatus = 1;
+    	}
+    	//循环遍历改变位置
+
+    	function sort() {
+		    var Li = content.childNodes,
+		    len = Li.length,
+		    i = 0,
+		    j = len - 1,
+		    sortSpeed = 50,
+		    inputSpeed = document.getElementById("ideNum").value;
+		    if (inputSpeed.match(/^[1-9]\d/)) { sortSpeed = inputSpeed };
+
+		    function timeout() {
+		        if (i < len) {
+		            if (j > i) {
+		                Li[j].style.backgroundColor = "red";
+		                if (parseInt(Li[j].innerHTML) < parseInt(Li[j - 1].innerHTML)) {
+		                    temp = Li[j];
+		                    Li[j] = Li[j - 1];
+		                    Li[j - 1] = temp;
+		                    Li[j].style.backgroundColor = "#00FF00";
+		                    content.insertBefore(Li[j], Li[j - 1]);
+		                    setTimeout(timeout, sortSpeed);
+		                    j--;
+		                } else {
+		                    j--;
+		                    Li[j].style.backgroundColor = "#00FF00";
+		                    setTimeout(timeout, sortSpeed);
+		                }
+		            } else { //这个else语句很关键！！！哎，总算搞出来了，不考虑这个else的话if只搜索一遍就跳出去了！设置这个else再初始化i和j的值！
+		                i++;
+		                Li[j].style.backgroundColor = "#000";
+		                j = len - 1;
+		                setTimeout(timeout, sortSpeed);
+		            }
+		        }
+		    }
+		    setTimeout(timeout, sortSpeed);
+		}
+
+
+    	document.getElementById("inputLeftIn").addEventListener("click",inputLeftIn,false);
+    	document.getElementById("inputRightIn").addEventListener("click",inputRightIn,false);
+    	document.getElementById("inputLeftOut").addEventListener("click",inputLeftOut,false);
+    	document.getElementById("inputRightOut").addEventListener("click",inputRightOut,false);
+    	document.getElementById("sort").addEventListener("click",function() {
+    			if(numberStatus != 1) {
+    				return false;
+    			}
+    			if(sort != 1) {
+    				sort();
+    				status = 1;
+    			}
+
+    	},false);
+    	document.getElementById("randomNum").addEventListener('click',randomNum,false);
+    	document.getElementById("refresh").addEventListener("click",function() {location.reload();},false);
+    </script>
+
+</body>
+</html>

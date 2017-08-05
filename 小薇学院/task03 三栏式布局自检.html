@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>三栏式布局</title>
+	<link rel="stylesheet" type="text/css" href="normalize.css">
+	<style>
+		body{
+			padding:0px;
+			margin:0px;
+		}
+		.header{
+			padding:20px 200px 0px 240px;
+			background-color:#eee;			
+		}
+		.middle{
+			border:1px solid #999;
+			/*margin:20px;*/
+			float:left;
+			background-color:white;
+			width:100%;
+			margin:0px 20px;
+
+		}		
+		.left{
+			border:1px solid #999;
+			float:left;
+			margin-left:-100%;
+			position:relative;
+			left:-240px;
+			width:198px;			
+
+		}
+		.right{
+
+			border:1px solid #999;
+			float:left;
+			margin-left:-200px;
+			position:relative;
+			right:-200px;
+			width:118px;
+		}
+		img{
+			margin:20px;
+			display:block;
+		}
+		/*圣杯布局 没有达到预期效果 而且窗口缩小元素会掉下来 双飞翼布局可以解决掉下来的问题 但也不能达到预期效果 因为left middle right里面都有子元素*/
+
+	</style>
+</head>
+<body>
+	<div class="header">
+		<div class="middle">
+			<span>
+			三栏式布局<br>
+			圣杯布局<br>
+			为了中间div内容不被遮挡，将中间div设置了左右padding-left和padding-right后，将左右两个div用相对布局position: relative并分别配合right和left属性，以便左右两栏div移动后不遮挡中间div.<br>双飞翼布局<br>
+			为了中间div内容不被遮挡，直接在中间div内部创建子div用于放置内容，在该子div里用margin-left和margin-right为左右两栏div留出位置。<br>多了1个div，少用大致4个css属性（圣杯布局中间divpadding-left和padding-right这2个属性，加上左右两个div用相对布局position: elative及对应的right和left共4个属性，一共6个；而双飞翼布局子div里用margin-left和margin-right共2个属性，6-2=4）。<br>并且双飞翼布局还有个好处，让Main变成BFC元素了，屏幕宽度缩小Main也不会被挤下去，圣杯布局就会被挤下去。
+			<br></span>
+		</div>
+		<div class="left">团队名称
+			 <img src="3.jpg" alt="logo" width="80" height="80"> 
+		</div>			
+		<div class="right">
+			<img src="4.png" alt="logo" width="80" height="80">
+			<img src="5.jpg" alt="logo" width="80" height="80">
+			<img src="6.jpg" alt="logo" width="80" height="80"> 
+		</div>
+	</div>
+</body>
+</html>

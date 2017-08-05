@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>双飞翼布局自检</title>
+	<style>
+		body{
+			margin:0px;
+			padding:0px;
+		}
+		.header,
+		.footer{
+			background-color:#666;
+			text-align:center;
+			clear:both;
+		}
+		/*.container{
+			padding:0px 220px 0px 200px;
+		}*/
+		.left{
+			background-color:#E79F6D;
+			float:left;
+			margin-left:-100%;
+			/*position:relative;
+			left:-200px;*/
+			width:200px;
+		}	
+		.middle{
+			background-color:#D6D6D6;
+			float:left;
+			width:100%;			
+		}
+		.right{
+			background-color:#77BBDD;
+			float:left;
+			margin-left:-220px;
+			/*position:relative;
+			right:-220px;*/
+			width:220px;
+		}
+		.inner{
+			padding:0px 220px 0px 200px;
+		}
+
+	</style>
+</head>
+<body>
+<div class="header">Header</div>
+<div class="container">
+	<div class="middle">
+		<div class="inner">Middle</div>
+	</div>
+	<div class="left">Left</div>	
+	<div class="right">Right</div>
+</div>
+<div class="footer">Footer</div>
+<!--
+	如后面的两个div，它们被包裹在一个定宽的大div中，且它们都是左浮动（float:left），且它们都是定宽，这时，给它们一个负的左外边距（margin-left<0），
+	如果margin-left =  - 它的宽度时，它就会向上跑到第一个div 的最右面；
+
+    如果margin-left:-100%，它就会跑到第一个div的最左面。
+
+    注意：第一个div的属性是：float:left;width:100%;，即它也是左浮动，且是100%宽度。） 
+ -->
+</body>
+</html>

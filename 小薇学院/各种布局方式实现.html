@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>布局方式实现</title>
+	<style>
+		body{
+			/*position:relative;*/
+			padding:0px;
+			margin:0px;
+			
+		}		
+		/*.left{////两栏布局 左固定右自适应
+			background-color:#999;
+			float:left;
+			width:100px;
+
+		}
+		.right{		
+			margin-left:100px;	
+			background-color:#333;			
+		}*/
+		
+		/*.left{	//左自适应 右固定		
+			background-color:#999;			
+			margin-right:100px;
+		}
+		.right{
+			position:absolute;			
+			right:0px;
+			top:0px;
+			width:100px;			
+			background-color:#333;
+		}*/
+		.header,
+		.footer{
+			background-color:#666;
+			text-align:center;
+			width:100%;
+			overflow:hidden;
+		}
+		.container{
+			margin:0px 200px 0px 220px;
+		}
+		.left{
+			background-color:#E79F6D;
+			float:left;
+			margin-left:-100%;
+			position:relative;
+			left:-220px;
+			width:220px;
+		}
+		.middle{
+			width:100%;
+			float:left;
+			background-color:#D6D6D6;
+		}
+		.right{
+			float:left;
+			margin-left:-200px;
+			position:relative;
+			right:-200px;
+			width:200px;
+			background-color:#77BBDD;
+		}
+
+	</style>
+</head>
+<body>
+<div class="header">header</div>
+<div class="container">
+	<div class="middle">middle</div>
+	<div class="left">left</div>
+	<div class="right">right</div>
+</div>
+<div class="footer">footer</div>
+		
+	<!-- 
+	两栏布局
+	左固定 右自适应
+	HTML:
+	<div class="left">2</div>
+	<div class="right">3</div>
+	CSS:
+	body{			
+			over:hidden;
+	}
+	.left{
+			background-color:#999;
+			float:left;
+			width:100px;
+
+		}
+		.right{		
+			margin-left:100px;	
+			background-color:#333;			
+		}
+	左自适应 右固定
+	HTML:
+	<div class="left">2</div>
+	<div class="right">3</div>
+	CSS:
+	body{
+			position:relative;
+			over:hidden;
+	}
+	.left{			
+			background-color:#999;			
+			margin-right:100px;
+	}
+	.right{
+			position:absolute;			
+			right:0px;
+			top:0px;
+			width:100px;			
+			background-color:#333;
+	}
+	三栏布局：两侧固定 中间自适应
+	圣杯布局
+	HTML:
+	<div class="header">header</div>
+	<div class="container">
+		<div class="middle">middle</div>
+		<div class="left">left</div>
+		<div class="right">right</div>
+	</div>
+	<div class="footer">footer</div>
+	CSS:
+		body{
+			/*position:relative;*/
+			padding:0px;
+			margin:0px;
+			
+		}
+		.header,
+		.footer{
+			background-color:#666;
+			text-align:center;
+			width:100%;
+			overflow:hidden;
+		}
+		.container{
+			margin:0px 200px 0px 220px;
+		}
+		.left{
+			background-color:#E79F6D;
+			float:left;
+			margin-left:-100%;
+			position:relative;
+			left:-220px;
+			width:220px;
+		}
+		.middle{
+			width:100%;
+			float:left;
+			background-color:#D6D6D6;
+		}
+		.right{
+			float:left;
+			margin-left:-200px;
+			position:relative;
+			right:-200px;
+			width:200px;
+			background-color:#77BBDD;
+		}
+	双飞翼布局：
+		HTML:
+		<div class="header">Header</div>
+		<div class="bd">
+	    <div class="main">
+	        <div class="inner">
+	            Main
+	        </div>
+	    </div>
+	    <div class="left">Left</div>
+	    <div class="right">Right</div>    
+	    </div>
+		<div class="footer">Footer</div>
+    
+		CSS：
+		body{padding:0;margin:0}
+        .header,.footer{width:100%;  background: #666;height:30px;clear:both;}
+        .bd{
+            /*padding-left:150px;*/
+            /*padding-right:190px;*/
+        }
+        .left{
+            background: #E79F6D;
+            width:150px;
+            float:left;
+            margin-left:-100%;
+            /*position: relative;*/
+            /*left:-150px;*/
+        }
+        .main{
+            background: #D6D6D6;
+            width:100%;
+            float:left;
+        }
+        .right{
+            background: #77BBDD;
+            width:190px;
+            float:left;
+            margin-left:-190px;
+            /*position:relative;*/
+            /*right:-190px;*/
+        }
+        .inner{
+            margin-left:150px;
+            margin-right:190px;
+        }
+	 -->
+</body>
+</html>

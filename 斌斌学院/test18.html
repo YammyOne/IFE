@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		
+		#outNum {					
+			list-style:none;
+		}
+		#outNum li {
+			display:inline;
+			margin:10px;
+			padding:10px;
+			color:orange;
+			background-color:#eee;
+			cursor:pointer;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" id = "inNum" name="number">
+	<button id="btnLeftIn">左侧入</button>
+	<button id="btnRightIn">右侧入</button>
+	<button id="btnLeftOut">左侧出</button>
+	<button id="btnRightOut">右侧出</button>
+	<!-- 数字队列 -->
+	<ul id="outNum"></ul>
+
+	<script>
+		var inNum = document.getElementById("inNum");
+		var btnLeftIn = document.getElementById("btnLeftIn");
+		var btnRightIn = document.getElementById("btnRightIn");
+		var btnLeftOut = document.getElementById("btnLeftOut");
+		var btnRightOut = document.getElementById("btnRightOut");
+		var outNum = document.getElementById("outNum");
+		function insert(direction) {
+			if(inNum.value == "") {
+				alert("输入!");
+				inNum.focus();				
+			}else if(isNaN(inNum.value)) {
+				alert("只能输入数值!");
+				inNum.value = "";
+				inNum.focus();
+			}else {
+				var lis = document.createElement("li");
+				lis.innerHTML = inNum.value;
+				if(direction === "left") {
+					outNum.insertBefore(lis,outNum.firstChild)
+				}else if(direction === "right") {
+					outNum.appendChild(lis);
+				}
+			}
+		}
+		function del(node,direction) {
+			if(outNum.childNodes.length <= 0) {
+				alert("没有数据可以删除!");
+				return false;
+			}else {
+				if(direction == "left") {
+					alert("删除"+outNum.firstChild.innerText+"!");
+					outNum.removeChild(outNum.firstChild);					
+				}else if(direction == "right") {
+					alert("删除"+outNum.lastChild.innerText+"!");
+					outNum.removeChild(outNum.lastChild)
+				}else {
+					alert("删除"+outNum.removeChild(node).innerText+"!");
+				}
+			}
+		}
+		btnLeftIn.onclick = function() {insert("left");};
+		btnRightIn.onclick = function() {insert("right");};
+		btnLeftOut.onclick = function() {del(-1,"left");};
+		btnRightOut.onclick = function() {del(-1,"right");};
+		outNum.onclick = function(event) {del(event.target);};
+	</script>
+</body>
+</html>

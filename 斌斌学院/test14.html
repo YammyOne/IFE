@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>任务二：零基础JavaScript编码（二）</title>
+	</head>
+	<body>
+		<h3>污染城市列表</h3>
+		<ul id="aqi-list">
+	<!--   
+	<li>第一名：福州（样例），10</li>
+	<li>第二名：福州（样例），10</li> -->
+		</ul>
+	
+	<script type="text/javascript">
+	
+		var aqiData = [
+			["北京", 90],
+			["上海", 50],
+			["福州", 10],
+			["广州", 50],
+			["成都", 90],
+			["西安", 100]
+		];
+		
+		(function () {
+		
+		/*
+		 在注释下方编写代码
+		 遍历读取aqiData中各个城市的数据
+		 将空气质量指数大于60的城市显示到aqi-list的列表中
+		*/
+		var arr = ['一', '二', '三', '四', '五', '六']
+		var list = document.getElementById("aqi-list");
+		
+			
+			/*给aqiData冒泡排序
+			for(var i = 0; i < aqiData.length; i++){
+				for(var j = 0; j < aqiData.length - 1; j++){
+					var temp;
+					if(aqiData[j][1] < aqiData[j + 1][1]){
+						temp = aqiData[j];
+						aqiData[j] = aqiData[j + 1];
+						aqiData[j + 1] = temp;
+					}
+				}
+			}*/
+			
+			/* 排序 */
+			aqiData.sort(function(a, b){
+				return b[1] - a[1];
+			})
+			
+			for(var i = 0; i < aqiData.length; i++){	
+				var choice = aqiData[i];
+				if(choice[1] > 60){
+					var listItem = document.createElement("li");
+					listItem.innerHTML = "第" + arr[i] + '名 : ' + choice;
+					list.appendChild(listItem);
+				}
+			}
+		
+		})();
+		/*
+		将创建一个数组，并按字母顺序进行排序
+		
+
+var arr = new Array(6)
+arr[0] = "George"
+arr[1] = "John"
+arr[2] = "Thomas"
+arr[3] = "James"
+arr[4] = "Adrew"
+arr[5] = "Martin"
+
+document.write(arr)
+document.write(arr.sort())
+输出：
+George,John,Thomas,James,Adrew,Martin
+Adrew,George,James,John,Martin,Thomas
+
+创建一个数组
+
+var arr = new Array(6)
+arr[0] = "10"
+arr[1] = "5"
+arr[2] = "40"
+arr[3] = "25"
+arr[4] = "1000"
+arr[5] = "1"
+
+document.write(arr + "<br />")
+document.write(arr.sort())
+
+输出：
+10,5,40,25,1000,1
+1,10,1000,25,40,5
+
+请注意，上面的代码没有按照数值的大小对数字进行排序，要实现这一点，就必须使用一个排序函数
+
+function sortNumber(a,b)
+{
+return a - b
+}
+
+var arr = new Array(6)
+arr[0] = "10"
+arr[1] = "5"
+arr[2] = "40"
+arr[3] = "25"
+arr[4] = "1000"
+arr[5] = "1"
+
+document.write(arr + "<br />")
+document.write(arr.sort(sortNumber))
+
+输出：
+10,5,40,25,1000,1
+1,5,10,25,40,1000
+
+如果是一个对象数组
+
+var aqiData =[
+			["北京", 90],
+  			["上海", 50],
+  			["福州", 10],
+  			["广州", 50],
+  			["成都", 90],
+  			["西安", 100]
+		];
+
+aqiData.sort(function(a,b) {//数组从大到小排序(按照数字排序)
+				return b[1] - a[1];
+			}
+		同理取出数值:var choice = aqiData[i];
+		choice[1]即为数组中的数值
+		
+		*/
+	</script>
+		
+	</body>
+</html>
